@@ -2,7 +2,7 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: productms
+      - id: conversionfactor
         uri: lb://coversionfactor
         predicates:
-        - Path=/create/conversionfactor
+        - Path=/create/conversionfactor/**
