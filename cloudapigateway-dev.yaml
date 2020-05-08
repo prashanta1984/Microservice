@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: productms
+        uri: lb://coversionfactor
+        predicates:
+        - Path=/create/conversionfactor
