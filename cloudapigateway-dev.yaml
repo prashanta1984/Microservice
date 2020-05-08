@@ -5,4 +5,4 @@ spring:
       - id: conversionfactor
         uri: lb://coversionfactor
         predicates:
-        - Path=/create/conversionfactor/**
+        - Path=/getConversionRequest
