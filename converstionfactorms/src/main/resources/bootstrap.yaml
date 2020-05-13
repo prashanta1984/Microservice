@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+     # uri: ${conversionfactor.configserverurl:http://192.168.99.100:8888}
+      uri:    ${conversionfactor.configserverurl:http://localhost:8888}
+      fail-fast: false
+  application:
+    name: conversionfactor
+  profiles:    active: dev
+
+server:  port: 0
