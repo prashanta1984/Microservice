@@ -3,8 +3,8 @@ spring:
     config:
       server:
         git:
-         # uri: C:\gitlocal
-         uri: https://github.com/prashanta1984/Microservice.git
+         uri: C:\gitlocal
+         #uri: https://github.com/prashanta1984/Microservice.git
          skipSslValidation: true
     
 
