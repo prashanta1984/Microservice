@@ -1,0 +1,65 @@
+run for each : mvn clean package -DskipTests
+
+docker build -t prashantajena/configserverkol:1 .
+docker run -p 8888:8888 -d --name configserverkol --network ms-chassis-nw  prashantajena/configserverkol:1
+
+docker tag prashantajena/configserverkol:1 prashantadockertest/configserverkol:1
+
+docker build -t prashantajena/eurekakol:1 .
+docker run -p 8761:8761 -d --name eurekakol --network ms-chassis-nw prashantajena/eurekakol:1
+
+docker tag  prashantajena/eurekakol:1 prashantadockertest/eurekakol:1
+
+docker build -t prashantajena/cloudapigatewaykol:1 .
+docker run -p 80:9092 -d --name cloudapigatewaykol --network ms-chassis-nw --env cloudapigateway.configserverurl=http://configserverkol:8888 --env cloudapigateway.eureka.url=http://eurekakol:8761/eureka prashantajena/cloudapigatewaykol:1
+docker login
+docker tag prashantajena/cloudapigatewaykol:1 prashantadockertest/prashantajena:latest
+docker images
+docker push prashantadockertest/prashantajena
+
+docker build -t prashantajena/discountmskol:1 .
+docker run -d --name discoutms --network ms-chassis-nw --env discountms.configserverurl=http://configserverkol:8888 --env discountms.eureka.url=http://eurekakol:8761/eureka kapilshekharraina/discountmskol:1
+
+docker build -t prashantajena/productmskol:1 .
+docker run -d --name productms --network ms-chassis-nw --env productms.configserverurl=http://configserverkol:8888 --env productms.eureka.url=http://eurekakol:8761/eureka kapilshekharraina/productmskol:1 .
+
+--------------------
+docker tag local-image:tagname new-repo:tagname
+docker push new-repo:tagname
+
+docker push prashantadockertest/prashantajena:tagname
+
+docker tag local-image:tagname new-repo:tagname
+
+docker push  kapilshekharraina/cloudapigatewaykol:1
+
+docker tag prashantajena/cloudapigatewaykol:1 prashantadockertest/prashantajena:latest
+
+docker pull prashantadockertest/prashantajena:latest
+
+prashantadockertest
+Tulu@1393
+
+docker build -t prashantajena/configserverkol:1 .
+docker run -p 8888:8888 -d --name configserverconversion --network ms-chassis-nw  prashantajena/configserverkol:1
+
+docker tag prashantajena/configserverkol:1 prashantadockertest/configserverkol:1
+
+docker build -t prashantajena/eurekakol:1 .
+docker run -p 8761:8761 -d --name eurekakol --network ms-chassis-nw prashantajena/eurekakol:1
+
+docker tag  prashantajena/eurekakol:1 prashantadockertest/eurekakol:1
+
+docker build -t prashantajena/cloudapigatewaykol:1 .
+docker run -p 80:9092 -d --name cloudapigatewaykol --network ms-chassis-nw --env cloudapigateway.configserverurl=http://configserverkol:8888 --env cloudapigateway.eureka.url=http://eurekakol:8761/eureka prashantajena/cloudapigatewaykol:1
+docker login
+docker tag prashantajena/cloudapigatewaykol:1 prashantadockertest/prashantajena:latest
+docker images
+docker push prashantadockertest/prashantajena
+
+
+docker build -t prashantajena/conversionfactorkol:1 .
+docker run  -d --name conversionfactor --network ms-chassis-nw --env conversionfactor.configserverurl=http://configserverconversion:8888 --env conversionfactor.eureka.url=http://eurekakol:8761/eureka prashantajena/conversionfactorkol:1
+
+docker tag prashantajena/conversionfactorkol:1 prashantadockertest/conversionfactorkol:1
+docker push prashantadockertest/conversionfactorkol
