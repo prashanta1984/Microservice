@@ -1,0 +1,28 @@
+MS - 1
+// Conversion assumed to be with dollar to simplify things.(otherwise you will need to maintain conversion factor for one currency with all other currencies)
+GET ConversionFactor http://localhost:port_number/conversionfactor/<currency>;;;  [ Get existing conversion factor ]
+GET ConversionFactor http://localhost:port_number/conversionfactor/<fromcurrencycode>/<tocurrencycode>; [Get conversion factor between two currencies]
+PUT Response http://localhost:port_number/conversionfactor [ Update a conversion factor ]
+POST Response http://localhost:port_number/conversionfactor [ Add a new conversion factor ]
+ConversionFactor[id,currencycode,countrycode,factor]
+for example
+ID        CURRENCY    COUNRTY        CONVERSIONFACTOR
+10001    GBP               GB                     1.29                         (i.e. one GBP = 1.29 USD )
+10001    GBP               GB                     1.29                         (i.e. one GBP = 1.29 USD )
+10001    GBP               GB                     1.29                         (i.e. one GBP = 1.29 USD )
+10002    INR                IND                     0.014                        (i.e. one INR = 0.014 USD )
+MS - 2
+GET Conversion http://localhost:port_number/currency/conversion/<amount>/<fromcurrencycode>/<tocurrencycode>;
+http://localhost:port_number/currency/conversion/100/GBP/INR
+ = 9213.18
+Option 1
+    /conversionfactor/GBP = 0.79 [ 100 * 1.29 = 129 i.e. 100 GBP = 129 DOLLARS]
+    /conversionfactor/INR = 0.014 [ so 1 dollar is 71.4 INR, so 129 DOLLARS is 9214.28 INR]
+Option 2(Better and Optimized)
+ http://localhost:port_number/currency/conversionfactor/100/GBP/INR
+1 GBP = 1.29 USD
+1 USD = 1/0.014 = 71.42 INR
+So GBP = 92.14 INR
+And 100 GBP = 9213.18 INR ( which is the return value)
+
+http://localhost:8084/currency/conversion/500/USD/IND

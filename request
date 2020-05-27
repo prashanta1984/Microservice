@@ -1,0 +1,21 @@
+http://localhost:8081/create/conversionfactor
+create 
+{
+    
+    "currencyCode": "INR",
+    "countryCode": "IND",
+    "factor": 1.31
+}
+http://localhost:8081/update/conversionfactor
+
+
+
+Fegnclient
+http://localhost:8084/currency/conversion/500/USD/IND
+http://localhost:8084/actuator/hystrix
+
+dashboard
+http://localhost:8084/actuator/hystrix.stream
+
+
+https://github.ibm.com/prasjena/microserviceboot.git
