@@ -1,4 +1,12 @@
-http://localhost:8081/create/conversionfactor
+zippkin:http://192.168.99.100:9411/zipkin/ docker
+http://192.168.99.100:8084/hystrix/
+http://192.168.99.100:8084/actuator/hystrix.stream
+
+http://localhost:8081/getConversionRequest
+http://192.168.99.100:8081/getConversionRequest
+
+http://localhost:8081/create/conversionfactor---local
+http://192.168.99.100:8081/create/conversionfactor--- docker
 create 
 {
     
@@ -6,8 +14,26 @@ create
     "countryCode": "IND",
     "factor": 1.31
 }
-http://localhost:8081/update/conversionfactor
 
+http://localhost:8081/getConversionfactor
+http://192.168.99.100:8081/getConversionfactor -docker
+{
+    "id": 10001,
+    "currencyCode": "INR",
+    "countryCode": "IND",
+    "factor": 1.31
+}
+
+http://localhost:8081/update/conversionfactor
+http://192.168.99.100:8081/update/conversionfactor-docker
+{
+    "id": 10001,
+    "currencyCode": "INR",
+    "countryCode": "IND",
+    "factor": 1.32
+}
+
+http://localhost:8081/getConversionfactor
 
 
 Fegnclient
@@ -15,7 +41,16 @@ http://localhost:8084/currency/conversion/500/USD/IND
 http://localhost:8084/actuator/hystrix
 
 dashboard
+http://localhost:8084/hystrix/
 http://localhost:8084/actuator/hystrix.stream
+192.168.99.100
+http://192.168.99.100:8084/actuator/hystrix.stream
+
+cloud api gateway
+http://localhost:9092/currency/conversion/500/USD/IND local
+http://192.168.99.100:9092/currency/conversion/500/USD/IND docker
+http://192.168.99.104:32474/currency/conversion/500/USD/IND kubernates
+
 
 
 https://github.ibm.com/prasjena/microserviceboot.git

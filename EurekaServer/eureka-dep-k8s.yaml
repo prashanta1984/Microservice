@@ -27,7 +27,7 @@ spec:
 
       containers: 
         - 
-          image: "kapilshekharraina/eurekakol:1"
+          image: "prashantadockertest/eurekakol:1"
           imagePullPolicy: Always
           name: eureka
           ports: 

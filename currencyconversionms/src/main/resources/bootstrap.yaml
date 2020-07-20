@@ -2,6 +2,7 @@ spring:
   cloud:
     config:
       uri: ${currencyconversionms.configserverurl:http://192.168.99.100:8888}
+      #uri: ${currencyconversionms.configserverurl:http://localhost:8888}
       fail-fast: false
   application:
     name: currencyconversionms

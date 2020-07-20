@@ -3,9 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   labels: 
-    app: cloudapigateway
+    app: currencyconversionms
     version: v1
-  name: cloudapigateway
+  name: currencyconversionms
 spec: 
   strategy: # Default, so usually not specified
     type: RollingUpdate
@@ -15,30 +15,30 @@ spec:
   replicas: 1
   selector: 
     matchLabels: 
-      app: cloudapigateway
+      app: currencyconversionms
       version: v1
   template: 
     metadata: 
       labels: 
-        app: cloudapigateway
+        app: currencyconversionms
         version: v1
 
     spec: 
 
       containers: 
         - 
-          image: "prashantadockertest/cloudapigateway:1"
+          image: "prashantadockertest/currencyconversion:1"
           imagePullPolicy: Always
-          name: cloudapigateway
+          name: currencyconversionms
           ports: 
 #          - containerPort: 8081   
           - name: httpport
-            containerPort: 9092
-            hostPort: 9092      
+            containerPort: 8084
+            hostPort: 8084      
           env:
-            - name: cloudapigateway.configserverurl
+            - name: currencyconversionms.configserverurl
               value: "http://configserver:8888"
-            - name: cloudapigateway.eureka.url
+            - name: currencyconversionms.eureka.url
               value: "http://eureka:8761/eureka"  
 
               

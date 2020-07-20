@@ -3,9 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   labels: 
-    app: cloudapigateway
+    app: conversionfactor
     version: v1
-  name: cloudapigateway
+  name: conversionfactor
 spec: 
   strategy: # Default, so usually not specified
     type: RollingUpdate
@@ -15,30 +15,30 @@ spec:
   replicas: 1
   selector: 
     matchLabels: 
-      app: cloudapigateway
+      app: conversionfactor
       version: v1
   template: 
     metadata: 
       labels: 
-        app: cloudapigateway
+        app: conversionfactor
         version: v1
 
     spec: 
 
       containers: 
         - 
-          image: "prashantadockertest/cloudapigateway:1"
+          image: "prashantadockertest/conversionfactor:1"
           imagePullPolicy: Always
-          name: cloudapigateway
+          name: conversionfactor
           ports: 
 #          - containerPort: 8081   
           - name: httpport
-            containerPort: 9092
-            hostPort: 9092      
+            containerPort: 8081
+            hostPort: 8081      
           env:
-            - name: cloudapigateway.configserverurl
+            - name: conversionfactor.configserverurl
               value: "http://configserver:8888"
-            - name: cloudapigateway.eureka.url
+            - name: conversionfactor.eureka.url
               value: "http://eureka:8761/eureka"  
 
               

@@ -1,7 +1,7 @@
 run for each : mvn clean package -DskipTests
 
 docker build -t prashantajena/configserverkol:1 .
-docker run -p 8888:8888 -d --name configserverkol --network ms-chassis-nw  prashantajena/configserverkol:1
+docker run -p 8888:8888 -d --name configserverkol --network ms-chassis-nw  prashantajena/configserverkol:2
 
 docker tag prashantajena/configserverkol:1 prashantadockertest/configserverkol:1
 
@@ -57,9 +57,18 @@ docker tag prashantajena/cloudapigatewaykol:1 prashantadockertest/prashantajena:
 docker images
 docker push prashantadockertest/prashantajena
 
+docker build -t prashantadcokertest/currencyconversion:1 .
+docker run -p 8084:8084 -d --name currencyconversion --network ms-chassis-nw --env currencyconversionms.configserverurl=http://configserverconversion:8888 --env currencyconversionms.eureka.url=http://eurekakol:8761/eureka prashantadcokertest/currencyconversion:1
 
 docker build -t prashantajena/conversionfactorkol:1 .
 docker run  -d --name conversionfactor --network ms-chassis-nw --env conversionfactor.configserverurl=http://configserverconversion:8888 --env conversionfactor.eureka.url=http://eurekakol:8761/eureka prashantajena/conversionfactorkol:1
 
 docker tag prashantajena/conversionfactorkol:1 prashantadockertest/conversionfactorkol:1
 docker push prashantadockertest/conversionfactorkol
+----------------------------------------------------
+
+docker build -t prashantadockertest/configserverkol:2 .
+docker run -p 8888:8888 -d --name configserverkol --network ms-chassis-nw  prashantadockertest/configserverkol:2
+
+docker build -t prashantadockertest/eurekakol:1 .
+docker run -p 8761:8761 -d --name eurekakol --network ms-chassis-nw prashantadockertest/eurekakol:1

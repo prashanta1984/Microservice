@@ -27,7 +27,7 @@ spec:
 
       containers: 
         - 
-          image: "kapilshekharraina/configserverkol:1"
+          image: "prashantadockertest/configserverkol:2"
           imagePullPolicy: Always
           name: configserver
           ports: 

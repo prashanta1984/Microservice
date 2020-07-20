@@ -3,10 +3,15 @@ spring:
     config:
       server:
         git:
-         #uri: C:\gitlocal
-         uri: https://github.com/prashanta1984/Microservice.git
-         skipSslValidation: true
-    
+          #uri: C:\work\ksr\kolkata2020labsconfig
+          uri: https://github.com/prashanta1984/Microservice.git
+          skipSslValidation: true
+    bus:
+      enabled: true
+      destination: configXchangebus
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
 
 server:
   port: 8888
