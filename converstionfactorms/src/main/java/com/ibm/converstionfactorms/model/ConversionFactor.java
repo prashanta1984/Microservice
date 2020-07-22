@@ -27,12 +27,12 @@ public class ConversionFactor {
 		this.countryCode = countryCode;
 	}
 	private String countryCode;
-	private BigDecimal factor;
+	private double factor;
 	public ConversionFactor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ConversionFactor(Long id, String currencycode, String countrycode, BigDecimal factor) {
+	public ConversionFactor(Long id, String currencycode, String countrycode, double factor) {
 		super();
 		this.id = id;
 		this.currencyCode = currencycode;
@@ -46,10 +46,10 @@ public class ConversionFactor {
 		this.id = id;
 	}
 	
-	public BigDecimal getFactor() {
+	public double getFactor() {
 		return factor;
 	}
-	public void setFactor(BigDecimal factor) {
+	public void setFactor(double factor) {
 		this.factor = factor;
 	}
 	

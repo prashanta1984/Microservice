@@ -51,64 +51,33 @@ public class ConversionFactorController {
 	  
 	  
 		@GetMapping(value="/getConversionfactor",produces = MediaType.APPLICATION_JSON_VALUE)
-		public ConversionFactorResponse getConversionfactor(){
+		public List<ConversionFactor> getConversionfactor(){
 			List<ConversionFactor> coversionfactorlist=new ArrayList<>();
 			
 			coversionfactorlist=repository.findAll() ;
-			ConversionFactorResponse conversionFactorResponse=new ConversionFactorResponse();
-			for (ConversionFactor conversionFactor2 : coversionfactorlist) {
-				
-				conversionFactorResponse.setCountryCode(conversionFactor2.getCountryCode());
-			
-				conversionFactorResponse.setCurrencyCode(conversionFactor2.getCurrencyCode());
-				
-				conversionFactorResponse.setId(conversionFactor2.getId());
-				conversionFactorResponse.setFactor(conversionFactor2.getFactor());
-			}
-			return  conversionFactorResponse;
+			return  coversionfactorlist;
 			
 		}
 		
 	  
 	  
-		@PostMapping(value = "/coversionfactor", headers="Accept=application/json")
-		public CurrencyConversionBean retrieveConversionAmount
-			(@RequestBody CurrencyConversionRequest request){
-			
-		  double coversionAmount=0;
-			if(request.getFromcurrency().equalsIgnoreCase("USD"))
-			{
-				 coversionAmount=request.getAmount()*1.29;
-			}
-			
-			CurrencyConversionBean response = new CurrencyConversionBean(coversionAmount,request.getFromcurrency(), request.getToCurrency());
-			return response;
-		}
 		
 		@GetMapping(value = "/conversionfactor/{amount}/{fromcurrency}/{tocurrency}")
 	    public CurrencyConversionBean getFromCurrencyToCurrencyFeign(@PathVariable("amount") Double amount,@PathVariable("fromcurrency") String fromcurrencycode,
 	                                            @PathVariable("tocurrency") String tocurrencycode) {
 		  
 			double coversionAmount=0;
-			if(fromcurrencycode.equalsIgnoreCase("USD"))
-			{
-				 coversionAmount=amount*1.29;
-			}
+			double conversionFactor= conversionFactorService.getConversionFactorFromCurrencyCode(fromcurrencycode).get().getFactor();
+			
+		
+				 coversionAmount=amount*conversionFactor;
+			
 			
 			CurrencyConversionBean response = new CurrencyConversionBean(coversionAmount,fromcurrencycode, tocurrencycode);
 			return response;
 		}
 	
-	  @GetMapping(path = "/{fromcurrencycode}/{tocurrencycode}")
-	    public String getFromCurrencyToCurrency(@PathVariable("fromcurrencycode") String fromcurrencycode,
-	                                            @PathVariable("tocurrencycode") String tocurrencycode) {
-		  BigDecimal conversionFactorFrom = conversionFactorService.getConversionFactorFromCurrencyCode(fromcurrencycode).get().getFactor();
-		  BigDecimal conversionFactorTO= conversionFactorService.getConversionFactorFromCurrencyCode(tocurrencycode).get().getFactor();
-	      
-		  
-		  return conversionFactorFrom+ "" +conversionFactorTO;
-	    }
-	  
+	  	  
 	  @PostMapping(value="/create/conversionfactor",headers="Accept=application/json")
 	  public ResponseEntity<?> createConversionFactor(@RequestBody ConversionFactor conversionfactor){
 	  
