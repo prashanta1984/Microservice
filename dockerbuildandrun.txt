@@ -72,3 +72,18 @@ docker run -p 8888:8888 -d --name configserverkol --network ms-chassis-nw  prash
 
 docker build -t prashantadockertest/eurekakol:1 .
 docker run -p 8761:8761 -d --name eurekakol --network ms-chassis-nw prashantadockertest/eurekakol:1
+
+docker build -t prashantadockertest/currencyconversion:1 .
+
+docker run -p 8084:8084 -d --name currencyconversion --network ms-chassis-nw --env currencyconversionms.configserverurl=http://192.168.99.100:8888 --env currencyconversionms.eureka.url=http://192.168.99.100:8761/eureka prashantadockertest/currencyconversion:1
+
+docker build -t prashantadockertest/conversionfactor:1 .
+docker build -t prashantadockertest/conversionfactork:1 .
+
+docker run -p 8081:8081 -d --name conversionfactor --network ms-chassis-nw --env conversionfactor.configserverurl=http://192.168.99.100:8888 --env conversionfactor.eureka.url=http://192.168.99.100:8761/eureka prashantadockertest/conversionfactorc:1
+
+
+docker run -p 9092:9092 -d --name cloudapigatewaykol --network ms-chassis-nw --env cloudapigateway.configserverurl=http://192.168.99.100:8888 --env cloudapigateway.eureka.url=http://192.168.99.100:8761/eureka prashantadockertest/cloudapigateway:1
+
+docker build -t prashantadockertest/webauditms:1 .
+docker run -p 8077:8077 -d --name cloudapigatewaykol --network ms-chassis-nw --env cloudapigateway.configserverurl=http://192.168.99.100:8888 --env cloudapigateway.eureka.url=http://192.168.99.100:8761/eureka prashantadockertest/webauditms:1
