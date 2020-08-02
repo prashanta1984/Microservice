@@ -27,14 +27,14 @@ spec:
 
       containers: 
         - 
-          image: "prashantadockertest/configserverkol:2"
+          image: "prashantadockertest/configserverkol:3"
           imagePullPolicy: Always
           name: configserver
           ports: 
 #          - containerPort: 8081   
           - name: httpport
             containerPort: 8888
-            hostPort: 8888      
+            #hostPort: 8888      
   
 
               

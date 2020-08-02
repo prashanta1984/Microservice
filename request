@@ -1,3 +1,7 @@
+http://192.168.99.104:31858 eureka
+
+http://192.168.99.104:31777/zipkin/ kubernates
+
 zippkin:http://192.168.99.100:9411/zipkin/ docker
 http://192.168.99.100:8084/hystrix/
 http://192.168.99.100:8084/actuator/hystrix.stream
@@ -37,7 +41,7 @@ http://localhost:8081/getConversionfactor
 
 
 Fegnclient
-http://localhost:8084/currency/conversion/500/USD/IND
+http://192.168.99.100:8084/currency/conversion/500/USD/IND
 http://localhost:8084/actuator/hystrix
 
 dashboard

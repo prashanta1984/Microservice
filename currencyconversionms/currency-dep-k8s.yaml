@@ -27,7 +27,7 @@ spec:
 
       containers: 
         - 
-          image: "prashantadockertest/currencyconversion:1"
+          image: "prashantadockertest/currencyconversionk:1"
           imagePullPolicy: Always
           name: currencyconversionms
           ports: 

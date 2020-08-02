@@ -4,8 +4,9 @@ spring:
     sampler:
       probability: 1.0
   zipkin:
-    base-url: http://192.168.99.100:9411/  rabbitmq:    #host: rabbitmq-master
-    host: 192.168.99.100
+    #base-url: http://192.168.99.100:9411/
+    base-url: http://zipkin:9411  rabbitmq:    host: rabbitmq-master
+   # host: 192.168.99.100
     port: 5672
   cloud:    bus:      enabled: true
       destination: configXchangebus
@@ -22,8 +23,9 @@ eureka:
     fetchRegistry: true
     prefer-same-zone-eureka: true
     serviceUrl:
-      defaultZone: ${cloudapigateway.eureka.url:http://192.168.99.100:8761/eureka}
+      #defaultZone: ${cloudapigateway.eureka.url:http://192.168.99.100:8761/eureka}
       #defaultZone: ${conversionfactor.eureka.url:http://localhost:8761/eureka}
+      defaultZone: ${cloudapigateway.eureka.url:http://eureka:8761/eureka}
 management:
   endpoints:
     web:

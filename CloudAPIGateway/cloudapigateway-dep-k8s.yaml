@@ -27,7 +27,7 @@ spec:
 
       containers: 
         - 
-          image: "prashantadockertest/cloudapigateway:1"
+          image: "prashantadockertest/cloudapigatewayk:1"
           imagePullPolicy: Always
           name: cloudapigateway
           ports: 

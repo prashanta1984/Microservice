@@ -27,7 +27,7 @@ spec:
 
       containers: 
         - 
-          image: "prashantadockertest/conversionfactor:1"
+          image: "prashantadockertest/conversionfactork:1"
           imagePullPolicy: Always
           name: conversionfactor
           ports: 
